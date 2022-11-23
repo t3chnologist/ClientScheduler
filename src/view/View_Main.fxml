@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller_Main">
+    <children>
+        <Label layoutX="26.0" layoutY="21.0" text="Scheduler">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <TabPane layoutX="10.0" layoutY="66.0" prefHeight="474.0" prefWidth="979.0" rotateGraphic="true" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab closable="false" style="-fx-back: #536872;" text="Appointment">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView fx:id="appointmentTableView" layoutX="4.0" layoutY="63.0" prefHeight="310.0" prefWidth="971.0">
+                                    <columns>
+                                        <TableColumn fx:id="aptIDCol" prefWidth="20.0" style="-fx-alignment: CENTER;" text="ID" />
+                                        <TableColumn fx:id="aptTitleCol" prefWidth="59.0" text="Title" />
+                                        <TableColumn fx:id="aptDescriptionCol" prefWidth="130.0" text="Description" />
+                                        <TableColumn fx:id="aptLocationCol" prefWidth="109.0" text="Location" />
+                                        <TableColumn fx:id="aptContactCol" prefWidth="132.0" text="Contact" />
+                                        <TableColumn fx:id="aptCustomerCol" prefWidth="122.4000244140625" text="Customer" />
+                                        <TableColumn fx:id="aptUserIDCol" prefWidth="52.800048828125" style="-fx-alignment: CENTER;" text="User ID" />
+                                        <TableColumn fx:id="aptTypeCol" prefWidth="134.4000244140625" text="Type" />
+                                        <TableColumn fx:id="aptDateCol" prefWidth="84.0" style="-fx-alignment: CENTER;" text="Date" />
+                                        <TableColumn fx:id="aptStartTimeCol" prefWidth="64.7999267578125" style="-fx-alignment: CENTER;" text="Start time" />
+                                        <TableColumn fx:id="aptEndTimeCol" minWidth="0.0" prefWidth="61.60009765625" style="-fx-alignment: CENTER;" text="End time" />
+                                    </columns>
+                                </TableView>
+                                <HBox layoutX="106.0" layoutY="376.0" prefHeight="56.0" prefWidth="768.0" spacing="35.0">
+                                    <children>
+                                        <Label prefHeight="26.0" prefWidth="250.0" text="You can add, edit or cancel appointments here." />
+                                        <Button mnemonicParsing="false" onAction="#onAddNewAppointmentButtonClick" prefHeight="25.0" prefWidth="141.0" text="Add new appointment" />
+                                        <Button mnemonicParsing="false" onAction="#onEditAppointmentButtonClick" text="Edit appointment" />
+                                        <Button mnemonicParsing="false" onAction="#onDeleteAppointmentButtonClick" prefHeight="25.0" prefWidth="126.0" text="Cancel appointment" />
+                                    </children>
+                                    <padding>
+                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                    </padding>
+                                </HBox>
+                                <HBox layoutX="14.0" layoutY="14.0" prefHeight="9.0" prefWidth="958.0" spacing="15.0">
+                                    <children>
+                                        <Label prefHeight="40.0" prefWidth="176.0" text="View appointment schedules by: " />
+                                        <RadioButton fx:id="defaultViewRadioButton" mnemonicParsing="false" onAction="#onRadioButtonSelect" prefHeight="40.0" prefWidth="64.0" selected="true" text="Default">
+                                            <toggleGroup>
+                                                <ToggleGroup fx:id="aptViewToggleGroup" />
+                                            </toggleGroup>
+                                        </RadioButton>
+                                        <RadioButton fx:id="currentWeekRadioButton" mnemonicParsing="false" onAction="#onRadioButtonSelect" prefHeight="40.0" prefWidth="98.0" text="Current week" toggleGroup="$aptViewToggleGroup" />
+                                        <RadioButton fx:id="currentMonthRadioButton" mnemonicParsing="false" onAction="#onRadioButtonSelect" prefHeight="40.0" prefWidth="103.0" text="Current month" toggleGroup="$aptViewToggleGroup" />
+                                        <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="173.0" text="Search:" />
+                                        <TextField fx:id="appointmentSearchField" onAction="#onAppointmentsSearchEvent" onKeyPressed="#onKeyPressed" prefHeight="25.0" prefWidth="183.0" promptText="Search appointment" />
+                                        <Button mnemonicParsing="false" onAction="#onAppointmentsSearchEvent" text="Search" />
+                                    </children>
+                                </HBox>
+                            </children></AnchorPane>
+                    </content>
+                </Tab>
+                <Tab closable="false" text="Customer">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <TableView fx:id="customerTableView" layoutX="25.0" layoutY="59.0" prefHeight="350.0" prefWidth="744.0">
+                                    <columns>
+                                        <TableColumn fx:id="customerIDCol" editable="false" prefWidth="29.5999755859375" style="-fx-alignment: CENTER;" text="ID" />
+                                        <TableColumn fx:id="customerNameCol" prefWidth="143.20001983642578" text="Name" />
+                                        <TableColumn fx:id="customerAddressCol" prefWidth="194.0" text="Address" />
+                                        <TableColumn fx:id="postalCodeCol" minWidth="0.0" prefWidth="89.0" style="-fx-alignment: CENTER;" text="Postal Code" />
+                                        <TableColumn fx:id="stateProvinceCol" prefWidth="157.0" text="State/Province" />
+                                        <TableColumn fx:id="phoneNumberCol" prefWidth="129.0" text="Phone number" />
+                                    </columns>
+                                </TableView>
+                                <Label layoutX="25.0" layoutY="24.0" text="You can add, update or edit customer information here. " />
+                                <VBox layoutX="798.0" layoutY="125.0" prefHeight="183.0" prefWidth="156.0" spacing="30.0">
+                                    <children>
+                                        <Button mnemonicParsing="false" onAction="#onAddNewCustomerButtonClick" prefHeight="26.0" prefWidth="132.0" text="Add new customer" />
+                                        <Button mnemonicParsing="false" onAction="#onEditCustomerButtonClick" prefHeight="26.0" prefWidth="135.0" text="Edit customer" />
+                                        <Button mnemonicParsing="false" onAction="#onDeleteCustomerButtonClick" prefHeight="26.0" prefWidth="146.0" text="Delete customer" />
+                                    </children>
+                                    <padding>
+                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                    </padding>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab closable="false" text="Report">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <VBox alignment="CENTER" layoutX="21.0" layoutY="14.0" prefHeight="425.0" prefWidth="948.0" spacing="15.0">
+                                    <children>
+                                        <HBox alignment="CENTER_LEFT" prefHeight="81.0" prefWidth="948.0" spacing="10.0" style="-fx-background-color: D4E0E4; -fx-background-radius: 10;">
+                                            <children>
+                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="41.0" prefWidth="296.0" text="1. Total number of customer appointments by:" textAlignment="CENTER" wrapText="true">
+                                                    <font>
+                                                        <Font size="14.0" />
+                                                    </font>
+                                                    <padding>
+                                                        <Insets left="5.0" />
+                                                    </padding>
+                                                </Label>
+                                                <VBox alignment="CENTER" spacing="5.0">
+                                                    <children>
+                                                        <ComboBox fx:id="reportOneTypeCB" onAction="#onReportOneTypeMonthSelect" prefHeight="25.0" prefWidth="140.0" promptText="type" />
+                                                        <ComboBox fx:id="reportOneMonthCB" onAction="#onReportOneTypeMonthSelect" prefHeight="25.0" prefWidth="140.0" promptText="month" />
+                                                    </children>
+                                                </VBox>
+                                                <VBox alignment="CENTER" prefHeight="72.0" prefWidth="138.0">
+                                                    <children>
+                                                        <Label fx:id="reportOneResultByType" contentDisplay="CENTER" prefHeight="41.0" prefWidth="295.0" text="select type to see " textFill="#b55328" wrapText="true">
+                                                            <font>
+                                                                <Font name="System Bold Italic" size="14.0" />
+                                                            </font>
+                                                            <padding>
+                                                                <Insets left="5.0" />
+                                                            </padding>
+                                                        </Label>
+                                                        <Label fx:id="reportOneResultByMonth" contentDisplay="CENTER" prefHeight="41.0" prefWidth="295.0" text="select month to see" textAlignment="CENTER" textFill="#b55328" wrapText="true">
+                                                            <font>
+                                                                <Font name="System Bold Italic" size="14.0" />
+                                                            </font>
+                                                            <padding>
+                                                                <Insets left="5.0" />
+                                                            </padding>
+                                                        </Label>
+                                                    </children>
+                                                </VBox>
+                                                <Separator orientation="VERTICAL" prefHeight="72.0" prefWidth="2.0" />
+                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="41.0" prefWidth="206.0" text="Result by both type and month:" textAlignment="CENTER" wrapText="true">
+                                                    <font>
+                                                        <Font size="14.0" />
+                                                    </font>
+                                                    <padding>
+                                                        <Insets left="5.0" />
+                                                    </padding>
+                                                </Label>
+                                                <Label fx:id="reportOneCombinedResult" contentDisplay="RIGHT" prefHeight="41.0" prefWidth="119.0" text="Select both to see combined result" textFill="#b55328" wrapText="true">
+                                                    <font>
+                                                        <Font name="System Bold Italic" size="14.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </HBox>
+                                        <HBox prefHeight="320.0" prefWidth="948.0">
+                                            <children>
+                                                <VBox alignment="CENTER" prefHeight="233.0" prefWidth="948.0" style="-fx-background-radius: 10; -fx-background-color: #DDE5E3;">
+                                                    <children>
+                                                        <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="948.0">
+                                                            <children>
+                                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="45.0" prefWidth="188.0" text="2. Appointments by contact:" wrapText="true">
+                                                                    <font>
+                                                                        <Font size="14.0" />
+                                                                    </font>
+                                                                </Label>
+                                                                <ComboBox fx:id="reportOneContactCB" onAction="#onReportTwoContactCBSelect" prefWidth="150.0" promptText="select contact" />
+                                                            </children>
+                                                        </HBox>
+                                                        <TableView fx:id="reportTwoAptTableView" prefHeight="213.0" prefWidth="948.0" style="-fx-background-radius: 10;">
+                                                            <columns>
+                                                                <TableColumn fx:id="reportTwoAptIDCol" prefWidth="20.0" style="-fx-alignment: CENTER;" text="ID" />
+                                                                <TableColumn fx:id="reportTwoAptTitleCol" prefWidth="59.0" text="Title" />
+                                                                <TableColumn fx:id="reportTwoDescriptionCol" prefWidth="136.0" text="Description" />
+                                                                <TableColumn fx:id="reportTwoLocationCol" prefWidth="90.0" text="Location" />
+                                                                <TableColumn fx:id="reportTwoContactCol" prefWidth="108.0" text="Contact" />
+                                                                <TableColumn fx:id="reportTwoCustomerCol" prefWidth="124.0" text="Customer" />
+                                                                <TableColumn fx:id="reportTwoUserIDCol" prefWidth="48.0" style="-fx-alignment: CENTER;" text="User ID" />
+                                                                <TableColumn fx:id="reportTwoTypeCol" prefWidth="147.0" text="Type" />
+                                                                <TableColumn fx:id="reportTwoDateCol" prefWidth="93.0" style="-fx-alignment: CENTER;" text="Date" />
+                                                                <TableColumn fx:id="reportTwoStartTimeCol" minWidth="7.0" prefWidth="64.0" style="-fx-alignment: CENTER;" text="Start time" />
+                                                                <TableColumn fx:id="reportTwoEndTimeCol" minWidth="0.0" prefWidth="58.0" style="-fx-alignment: CENTER;" text="End time" />
+                                                            </columns>
+                                                        </TableView>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT" prefHeight="131.0" prefWidth="948.0" spacing="15.0" style="-fx-background-color: DCE0E4; -fx-background-radius: 10;">
+                                            <children>
+                                                <VBox alignment="CENTER" prefHeight="58.0" prefWidth="376.0">
+                                                    <children>
+                                                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="58.0" prefWidth="393.0" text="3. Country with greatest number of customer appointments:" textAlignment="CENTER" wrapText="true">
+                                                            <font>
+                                                                <Font size="14.0" />
+                                                            </font>
+                                                        </Label>
+                                                    </children>
+                                                </VBox>
+                                                <Label fx:id="reportThreeMostApt" alignment="CENTER" contentDisplay="CENTER" prefHeight="58.0" prefWidth="157.0" textAlignment="CENTER" wrapText="true">
+                                                    <font>
+                                                        <Font name="System Bold Italic" size="14.0" />
+                                                    </font>
+                                                </Label>
+                                                <Separator orientation="VERTICAL" prefHeight="72.0" prefWidth="2.0" />
+                                                <VBox prefHeight="58.0" prefWidth="370.0" spacing="2.0">
+                                                    <children>
+                                                        <HBox alignment="CENTER" prefHeight="58.0" prefWidth="300.0">
+                                                            <children>
+                                                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="177.0" text="Compare other countries: " textAlignment="CENTER" wrapText="true">
+                                                                    <font>
+                                                                        <Font size="14.0" />
+                                                                    </font>
+                                                                </Label>
+                                                                <ComboBox fx:id="reportThreeCountryCB" onAction="#onReportThreeCountryCBSelect" prefHeight="25.0" prefWidth="117.0" promptText="select country" />
+                                                            </children>
+                                                        </HBox>
+                                                        <Label fx:id="reportThreeComboResult" alignment="CENTER" contentDisplay="CENTER" prefHeight="54.0" prefWidth="365.0" textAlignment="CENTER" wrapText="true">
+                                                            <font>
+                                                                <Font size="14.0" />
+                                                            </font>
+                                                        </Label>
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </children></AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+        <Button layoutX="902.0" layoutY="540.0" mnemonicParsing="false" onAction="#onExitButtonClick" prefWidth="50.0" style="-fx-background-color: #555555;" text="Exit" textFill="WHITE" />
+        <Label fx:id="activeUserLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="801.0" layoutY="43.0" prefHeight="25.0" prefWidth="188.0" text="activeUser" />
+        <HBox fx:id="aptMessageHBox" layoutX="334.0" layoutY="47.0" prefHeight="17.0" prefWidth="419.0" style="-fx-background-radius: 5;">
+            <children>
+                <Label prefHeight="17.0" prefWidth="136.0" text="Upcoming appointment:" />
+                <Label fx:id="upcomingAppointmentLabel" prefHeight="17.0" prefWidth="280.0" text="There are no upcoming appointments" wrapText="true" />
+            </children>
+            <padding>
+                <Insets left="5.0" />
+            </padding>
+        </HBox>
+    </children>
+</AnchorPane>

@@ -1,17 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="73405983-7ad9-42ca-b294-8aa7cdeeb8b6" name="Changes" comment="" />
+    <list default="true" id="73405983-7ad9-42ca-b294-8aa7cdeeb8b6" name="Changes" comment="InitialCommit">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_j_8_0_31.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DAO/DAO_Appointment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DAO/DAO_Contact.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DAO/DAO_Country.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DAO/DAO_Customer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DAO/DAO_FirstLvlDivision.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DAO/DAO_User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DAO/DBConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controller/Controller_Appointment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controller/Controller_Customer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controller/Controller_Login.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controller/Controller_Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/Appointment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/Contact.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/Country.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/Customer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/FirstLvlDivision.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/util/AlertHelper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/util/ComboBoxItems.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/util/InputValidation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/util/Login_en.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/util/Login_fr.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/util/RegEx.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/util/SceneHelper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/view/View_Appointment.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/view/View_Customer.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/view/View_Login.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/view/View_Main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/C868_SoftwareCapstone.iml" beforeDir="false" afterPath="$PROJECT_DIR$/C868_SoftwareCapstone.iml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="JavaFXApplication" />
+        <option value="FxmlFile" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="2HxJleqgDiAcs44Mc117qI0qnpf" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -20,9 +68,33 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false"
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/batno/IdeaProjects/C868_SoftwareCapstone/src/util",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15332031",
+    "project.structure.side.proportion": "0.25632185",
+    "settings.editor.selected.configurable": "preferences.pathVariables"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\batno\IdeaProjects\C868_SoftwareCapstone\src\util" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\batno\IdeaProjects\C868_SoftwareCapstone\src" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Scheduling Application" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="main.Main" />
+      <module name="C868_SoftwareCapstone" />
+      <option name="VM_PARAMETERS" value="--module-path ${PATH_TO_FX} --add-modules javafx.fxml,javafx.controls,javafx.graphics" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -31,8 +103,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1669220954323</updated>
+      <workItem from="1669220955708" duration="1908000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
