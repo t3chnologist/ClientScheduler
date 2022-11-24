@@ -14,8 +14,6 @@ import java.util.ResourceBundle;
 
 /**
  * Software Development Capstone - C868:  Scheduling Application for Financial Consulting Firm
- *
- * Javadoc files can be found at C868_SoftwareCapstone/src/javadoc
  * @author Batnomin Terbish
  * @version 1.0
  * */

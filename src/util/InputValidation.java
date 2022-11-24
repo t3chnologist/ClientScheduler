@@ -323,8 +323,7 @@ public class InputValidation {
      * @param tableView to set
      * */
     public static void setTableViewForSearchResult(TableView tableView) {
-        tableView.setStyle("-fx-background-color: rgba(255,239,239,0.97); " +
-                "-fx-border-color: #7fc6d4; ");
+        tableView.setStyle("-fx-border-color: #4a9800; ");
     }
 
     /**

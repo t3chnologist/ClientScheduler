@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
@@ -38,9 +39,12 @@ import static util.InputValidation.setTextFieldStyleForError;
  * @author Batnomin Terbish
  * */
 public class Controller_Main implements Initializable {
+    private ObservableList<Appointment> appointmentObservableList = null;
     @FXML private Label upcomingAppointmentLabel, activeUserLabel, reportOneCombinedResult,
             reportOneResultByType, reportOneResultByMonth, reportThreeComboResult, reportThreeMostApt;
     @FXML private TextField appointmentSearchField;
+    @FXML private TextField customerSearchField;
+
     @FXML private RadioButton defaultViewRadioButton, currentWeekRadioButton, currentMonthRadioButton;
     @FXML private ComboBox<String> reportOneTypeCB, reportOneMonthCB;
     @FXML private ComboBox<Contact> reportOneContactCB;
@@ -60,6 +64,8 @@ public class Controller_Main implements Initializable {
     @FXML private TableColumn<Appointment, Integer> aptUserIDCol, reportTwoUserIDCol;
     @FXML private TableColumn<Customer, String> customerNameCol, customerAddressCol, postalCodeCol,
             phoneNumberCol, stateProvinceCol;
+    private Object source;;
+    private KeyEvent keyEvent;
 
     /**
      * Method call to initialize a controller after its root elements have been processed completely.
@@ -398,44 +404,79 @@ public class Controller_Main implements Initializable {
         return result;
     }
 
-    public void onAppointmentsSearchEvent() throws SQLException {
-        searchAppointment();
-    }
-
     /**
      * Search method that sets the appointmentTableView based on the search text
-     * @lambda Using Stream to make it more compact and readable
-     * @throws SQLException for Appointment queries
      * */
-    public void searchAppointment() throws SQLException {
-        //check if searchValue is numeric
+    public void onAppointmentsSearchEvent() {
+
         String searchValue = appointmentSearchField.getText().toLowerCase();
-        if (searchValue.matches("[0-9.]+")) {
-            int searchNum = Integer.parseInt(searchValue);
-            ObservableList<Appointment> searchResult = DAO_Appointment.queryAppointments().stream()
-                    .filter(a -> a.getAppointmentID() == searchNum ||
-                            a.getUserID() == searchNum)
-                    .collect(Collectors.toCollection(FXCollections::observableArrayList));
+        appointmentSearchField.setStyle(null);
+        appointmentTableView.setStyle(null);
 
-            appointmentTableView.setItems(searchResult);
-        }
-        else {
-            ObservableList<Appointment> searchResult = DAO_Appointment.queryAppointments().stream()
-                    .filter(a -> a.getTitle().toLowerCase().contains(searchValue) ||
-                            a.getDescription().toLowerCase().contains(searchValue) ||
-                            a.getLocation().toLowerCase().contains(searchValue) ||
-                            a.getContactName().toLowerCase().contains(searchValue) ||
-                            a.getCustomerName().toLowerCase().contains(searchValue) ||
-                            a.getType().toLowerCase().contains(searchValue))
-                    .collect(Collectors.toCollection(FXCollections::observableArrayList));
+        if (!searchValue.isBlank() && !appointmentObservableList.isEmpty()) {
 
-            appointmentTableView.setItems(searchResult);
-            if (searchResult.isEmpty()) {
-                setTextFieldStyleForError(appointmentSearchField);
-                appointmentTableView.setPlaceholder(new Label("We couldn't find any results for \"" +
-                        searchValue + "\""));
+            if (searchValue.matches("[0-9.]+")) {
+                int searchNum = Integer.parseInt(searchValue);
+                ObservableList<Appointment> searchResult = appointmentObservableList.stream()
+                        .filter(a -> a.getAppointmentID() == searchNum ||
+                                a.getUserID() == searchNum)
+                        .collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+                appointmentTableView.setItems(searchResult);
             }
+            else {
+                ObservableList<Appointment> searchResult = appointmentObservableList.stream()
+                        .filter(a -> Integer.toString(a.getAppointmentID()).contains(searchValue) ||
+                                a.getTitle().toLowerCase().contains(searchValue) ||
+                                a.getDescription().toLowerCase().contains(searchValue) ||
+                                a.getLocation().toLowerCase().contains(searchValue) ||
+                                a.getContactName().toLowerCase().contains(searchValue) ||
+                                a.getCustomerName().toLowerCase().contains(searchValue) ||
+                                Integer.toString(a.getUserID()).contains(searchValue) ||
+                                a.getType().toLowerCase().contains(searchValue) ||
+                                a.getAppointmentDate().toString().contains(searchValue))
+                        .collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+                appointmentTableView.setItems(searchResult);
+
+                if (searchResult.isEmpty()) {
+                    setTextFieldStyleForError(appointmentSearchField);
+                    appointmentTableView.setPlaceholder(new Label("We couldn't find any results for \"" +
+                            searchValue + "\""));
+                }
+            }
+
             setTableViewForSearchResult(appointmentTableView);
+        }
+    }
+    /**
+     * Search method that sets the customerTableView based on the search text
+     * @lambda Using Stream to make it more compact and readable
+     * @throws SQLException for Customer queries
+     * */
+
+    public void onCustomerSearchEvent(ActionEvent actionEvent) throws SQLException {
+
+        String searchText = customerSearchField.getText().toLowerCase();
+        ObservableList<Customer> customers = DAO_Customer.queryCustomers();
+
+        if (!searchText.isBlank() && !customers.isEmpty()) {
+            ObservableList<Customer> searchResult = customers.stream()
+                    .filter(c -> Integer.toString(c.getId()).contains(searchText) ||
+                                c.getName().toLowerCase().contains(searchText) ||
+                                c.getAddress().toLowerCase().contains(searchText) ||
+                                c.getPostalCode().toLowerCase().contains(searchText) ||
+                                c.getDivision().toLowerCase().contains(searchText) ||
+                                c.getPhone().contains(searchText))
+                    .collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+            customerTableView.setItems(searchResult);
+
+            if (searchResult.isEmpty()) {
+                setTextFieldStyleForError(customerSearchField);
+                customerTableView.setPlaceholder(new Label("We couldn't find any results for \"" +
+                        searchText + "\""));
+            }
         }
     }
 
@@ -444,15 +485,19 @@ public class Controller_Main implements Initializable {
      * @lambda Using Stream to make it more compact and readable
      * @throws SQLException for Appointment queries
      * */
-    public void onKeyPressed(KeyEvent keyEvent) throws SQLException {
-        if (keyEvent.getCode() == KeyCode.ENTER && !appointmentSearchField.getText().isEmpty()) {
-            searchAppointment();
-        }
-        else if (keyEvent.getCode() == KeyCode.BACK_SPACE) {
+    public void onKeyPressedAtSearch(KeyEvent keyEvent) throws SQLException {
+        if (((Node) keyEvent.getSource()).getId().equals(appointmentSearchField.getId())) {
             if (appointmentSearchField.getText().isBlank()) {
                 refreshData();
                 appointmentTableView.setStyle(null);
                 appointmentSearchField.setStyle(null);
+            }
+        }
+        else if (((Node) keyEvent.getSource()).getId().equals(customerSearchField.getId())) {
+            if (customerSearchField.getText().isBlank()) {
+                customerSearchField.setStyle(null);
+                customerTableView.setPlaceholder(null);
+                customerTableView.setItems(DAO_Customer.queryCustomers());
             }
         }
     }
@@ -463,31 +508,38 @@ public class Controller_Main implements Initializable {
      * @throws SQLException SQLException
      * */
     protected void refreshData() throws SQLException {
+
         appointmentTableView.setPlaceholder(null);
+
         if (currentMonthRadioButton.isSelected()) {
             //Using Stream to make it more compact and readable
-            appointmentTableView.setItems(DAO_Appointment.queryAppointments().stream()
+            appointmentObservableList = DAO_Appointment.queryAppointments().stream()
                     .filter(a -> a.getStartLDT().getMonthValue() == LocalDateTime.now().getMonthValue())
-                    .collect(Collectors.toCollection(FXCollections::observableArrayList)));
-        }
-        else if (currentWeekRadioButton.isSelected()) {
+                    .collect(Collectors.toCollection(FXCollections::observableArrayList));
+        } else if (currentWeekRadioButton.isSelected()) {
             LocalDateTime startOfWeek = LocalDate.now().with(WeekFields.ISO.getFirstDayOfWeek())
                     .atStartOfDay().minusDays(1);
             LocalDateTime endOfWeek = startOfWeek.plusWeeks(1);
             //Using Stream to make it more compact and readable
-            appointmentTableView.setItems(DAO_Appointment.queryAppointments().stream()
+            appointmentObservableList = DAO_Appointment.queryAppointments().stream()
                     .filter(a -> a.getStartLDT().isAfter(startOfWeek) && a.getEndLDT().isBefore(endOfWeek))
-                    .collect(Collectors.toCollection(FXCollections::observableArrayList)));
-        }
-        else if (defaultViewRadioButton.isSelected()){
-            appointmentTableView.setItems(DAO_Appointment.queryAppointments());
+                    .collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+        } else if (defaultViewRadioButton.isSelected()) {
+            appointmentObservableList = DAO_Appointment.queryAppointments();
         }
 
+        appointmentTableView.setItems(appointmentObservableList);
+
+        if (!appointmentSearchField.getText().isBlank()) {
+            onAppointmentsSearchEvent();
+        }
+
+        // set upcoming appointment message text and style
         if (!upcomingAppointment().isEmpty()) {
             upcomingAppointmentLabel.setText(upcomingAppointment());
             aptMessageHBox.setStyle("-fx-background-color: #BFD4DB; -fx-background-radius: 5");
-        }
-        else {
+        } else {
             upcomingAppointmentLabel.setText("There is no upcoming appointment.");
             aptMessageHBox.setStyle(null);
         }

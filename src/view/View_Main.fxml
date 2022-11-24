@@ -26,10 +26,25 @@
         </Label>
         <TabPane layoutX="10.0" layoutY="66.0" prefHeight="474.0" prefWidth="979.0" rotateGraphic="true" tabClosingPolicy="UNAVAILABLE">
             <tabs>
-                <Tab closable="false" style="-fx-back: #536872;" text="Appointment">
+                <Tab fx:id="appointmentTab" closable="false" style="-fx-back: #536872;" text="Appointment">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
+                                <HBox layoutX="11.0" layoutY="21.0" prefHeight="9.0" prefWidth="958.0" spacing="15.0">
+                                    <children>
+                                        <Label prefHeight="40.0" prefWidth="176.0" text="View appointment schedules by: " />
+                                        <RadioButton fx:id="defaultViewRadioButton" mnemonicParsing="false" onAction="#onRadioButtonSelect" prefHeight="40.0" prefWidth="64.0" selected="true" text="Default">
+                                            <toggleGroup>
+                                                <ToggleGroup fx:id="aptViewToggleGroup" />
+                                            </toggleGroup>
+                                        </RadioButton>
+                                        <RadioButton fx:id="currentWeekRadioButton" mnemonicParsing="false" onAction="#onRadioButtonSelect" prefHeight="40.0" prefWidth="98.0" text="Current week" toggleGroup="$aptViewToggleGroup" />
+                                        <RadioButton fx:id="currentMonthRadioButton" mnemonicParsing="false" onAction="#onRadioButtonSelect" prefHeight="40.0" prefWidth="103.0" text="Current month" toggleGroup="$aptViewToggleGroup" />
+                                        <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="173.0" text="Search:" />
+                                        <TextField fx:id="appointmentSearchField" onAction="#onAppointmentsSearchEvent" onKeyPressed="#onKeyPressedAtSearch" prefHeight="25.0" prefWidth="183.0" promptText="Search appointment" />
+                                        <Button mnemonicParsing="false" onAction="#onAppointmentsSearchEvent" text="Search" />
+                                    </children>
+                                </HBox>
                                 <TableView fx:id="appointmentTableView" layoutX="4.0" layoutY="63.0" prefHeight="310.0" prefWidth="971.0">
                                     <columns>
                                         <TableColumn fx:id="aptIDCol" prefWidth="20.0" style="-fx-alignment: CENTER;" text="ID" />
@@ -56,25 +71,10 @@
                                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                                     </padding>
                                 </HBox>
-                                <HBox layoutX="14.0" layoutY="14.0" prefHeight="9.0" prefWidth="958.0" spacing="15.0">
-                                    <children>
-                                        <Label prefHeight="40.0" prefWidth="176.0" text="View appointment schedules by: " />
-                                        <RadioButton fx:id="defaultViewRadioButton" mnemonicParsing="false" onAction="#onRadioButtonSelect" prefHeight="40.0" prefWidth="64.0" selected="true" text="Default">
-                                            <toggleGroup>
-                                                <ToggleGroup fx:id="aptViewToggleGroup" />
-                                            </toggleGroup>
-                                        </RadioButton>
-                                        <RadioButton fx:id="currentWeekRadioButton" mnemonicParsing="false" onAction="#onRadioButtonSelect" prefHeight="40.0" prefWidth="98.0" text="Current week" toggleGroup="$aptViewToggleGroup" />
-                                        <RadioButton fx:id="currentMonthRadioButton" mnemonicParsing="false" onAction="#onRadioButtonSelect" prefHeight="40.0" prefWidth="103.0" text="Current month" toggleGroup="$aptViewToggleGroup" />
-                                        <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="173.0" text="Search:" />
-                                        <TextField fx:id="appointmentSearchField" onAction="#onAppointmentsSearchEvent" onKeyPressed="#onKeyPressed" prefHeight="25.0" prefWidth="183.0" promptText="Search appointment" />
-                                        <Button mnemonicParsing="false" onAction="#onAppointmentsSearchEvent" text="Search" />
-                                    </children>
-                                </HBox>
                             </children></AnchorPane>
                     </content>
                 </Tab>
-                <Tab closable="false" text="Customer">
+                <Tab fx:id="customerTab" closable="false" text="Customer">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
@@ -88,7 +88,14 @@
                                         <TableColumn fx:id="phoneNumberCol" prefWidth="129.0" text="Phone number" />
                                     </columns>
                                 </TableView>
-                                <Label layoutX="25.0" layoutY="24.0" text="You can add, update or edit customer information here. " />
+                        <HBox alignment="CENTER" layoutX="27.0" layoutY="20.0" prefHeight="25.0" prefWidth="740.0" spacing="15.0">
+                           <children>
+                                      <Label text="You can add, update or edit customer information here. " />
+                              <Label alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="184.0" text="Search:" />
+                              <TextField fx:id="customerSearchField" onAction="#onCustomerSearchEvent" onKeyPressed="#onKeyPressedAtSearch" promptText="Search customer" />
+                              <Button mnemonicParsing="false" onAction="#onCustomerSearchEvent" text="Search" />
+                           </children>
+                        </HBox>
                                 <VBox layoutX="798.0" layoutY="125.0" prefHeight="183.0" prefWidth="156.0" spacing="30.0">
                                     <children>
                                         <Button mnemonicParsing="false" onAction="#onAddNewCustomerButtonClick" prefHeight="26.0" prefWidth="132.0" text="Add new customer" />
@@ -103,7 +110,7 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab closable="false" text="Report">
+                <Tab fx:id="reportTab" closable="false" text="Report">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>

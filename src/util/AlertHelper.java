@@ -7,7 +7,6 @@ import java.util.Optional;
  * This is a helper class that provides alert structures, lke Yes-No confirmation or Error alerts.
  * @author Batnomin Terbish
  * */
-
 public class AlertHelper {
     /**
      * Method that creates Yes-No Confirmation-Alert.
