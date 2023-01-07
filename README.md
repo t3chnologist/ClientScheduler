@@ -1,4 +1,4 @@
-# ClientScheduler | Java Advanced Concepts + JavaFX + MySQL database
+# ClientScheduler | Java + JavaFX + MySQL DB
 
 ## Overview
 Client Scheduler is a GUI-based desktop application designed for a global consulting organization that operates in multiple languages and has offices located in Phoenix, 
